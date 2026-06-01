@@ -64,27 +64,16 @@ function App() {
   },
 ];
   const [open, setOpen] = useState(false);
-  const [showNav, setShowNav] = useState(true);
-const [lastScrollY, setLastScrollY] = useState(0);
-useEffect(() => {
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
+  const [lastScrollY, setLastScrollY] = useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      setLastScrollY(window.scrollY);
+    };
 
-    if (currentScrollY < 20) {
-      setShowNav(true);
-    } else if (currentScrollY > lastScrollY) {
-      setShowNav(false);
-    } else {
-      setShowNav(true);
-    }
+    window.addEventListener("scroll", handleScroll);
 
-    setLastScrollY(currentScrollY);
-  };
-
-  window.addEventListener("scroll", handleScroll);
-
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [lastScrollY]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const sections = ["home", "about", "services", "pricing", "gallery", "contact"];
@@ -165,7 +154,7 @@ useEffect(() => {
 
   return (
     <div className="site">
-      <header className={`navbar ${showNav ? "nav-show" : "nav-hide"} ${lastScrollY > 20 ? "nav-glass" : "nav-solid"}`}>
+      <header className={`navbar nav-show ${lastScrollY > 20 ? "nav-glass" : "nav-solid"}`}>
         <div className="logo" onClick={() => scrollToSection("home")}>
           <div className="logo-mark">MK</div>
           <div>
