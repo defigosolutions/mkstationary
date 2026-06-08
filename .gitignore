@@ -36,3 +36,10 @@ build/
 *.njsproj
 *.sln
 *.sw?
+
+# App data & uploads (never commit — contains sensitive data)
+data/db.json
+uploads/
+
+# PM2 ecosystem (server-specific)
+ecosystem.config.cjs
